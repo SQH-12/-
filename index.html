@@ -1,28 +1,112 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>文心云搜 - 资源聚合搜索</title>
+    <link rel="icon" href="https://beeimg.us.ci/temp/6f6b1770a79b6b09618ed2152f0be338.png" type="image/png">
+    <link rel="apple-touch-icon" href="https://beeimg.us.ci/temp/6f6b1770a79b6b09618ed2152f0be338.png">
     <style>
         :root {
-            --primary: #1a73e8;
-            --primary-dark: #1557b0;
-            --primary-light: #e8f0fe;
-            --bg: #f0f2f5;
-            --card-bg: #ffffff;
-            --text: #1f2937;
-            --text-secondary: #6b7280;
-            --border: #e5e7eb;
-            --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-            --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.12);
+            --bg: #0a0e1a;
+            --bg-secondary: #111827;
+            --bg-card: #1a1f36;
+            --bg-card-hover: #222a4a;
+            --bg-input: #1e2438;
+            --bg-header: linear-gradient(135deg, #0a0e1a 0%, #1a1f36 40%, #312e81 100%);
+            --text: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: #2a2f4a;
+            --border-light: #3a3f5a;
+            --primary: #818cf8;
+            --primary-dark: #6366f1;
+            --primary-light: #a5b4fc;
+            --primary-bg: #312e81;
+            --primary-bg-light: #1e1b4b;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            --shadow-hover: 0 4px 20px rgba(99, 102, 241, 0.25);
             --radius: 12px;
             --radius-sm: 8px;
             --radius-lg: 16px;
+            --success: #34d399;
+            --warning: #fbbf24;
+            --danger: #f87171;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --scrollbar-track: #1a1f36;
+            --scrollbar-thumb: #3a3f5a;
+            --scrollbar-thumb-hover: #5a5f7a;
+            --toast-bg: #1a1f36;
+            --toast-text: #f1f5f9;
+            --badge-bg: #312e81;
+            --badge-text: #a5b4fc;
+            --header-border: rgba(255, 255, 255, 0.08);
+            --engine-item-hover: #222a4a;
+            --engine-item-border: transparent;
+            --form-bg: #1e2438;
+            --form-border: #2a2f4a;
+            --footer-border: #2a2f4a;
+            --footer-bg: #111827;
+            --notice-bg: #1e1b4b;
+            --notice-border: #312e81;
+            --notice-text: #c4b5fd;
+            --card-header-bg: #111827;
+            --fallback-bg: #111827;
+            --btn-mini-bg: #1e2438;
+            --btn-mini-border: #2a2f4a;
+            --btn-mini-text: #94a3b8;
+            --btn-mini-hover-bg: #312e81;
+            --btn-mini-hover-text: #a5b4fc;
+            --btn-mini-hover-border: #6366f1;
+        }
+
+        [data-theme="light"] {
+            --bg: #f8fafc;
+            --bg-secondary: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f8fafc;
+            --bg-input: #ffffff;
+            --bg-header: linear-gradient(135deg, #ffffff 0%, #f8fafc 40%, #eef2ff 100%);
+            --text: #1f2937;
+            --text-secondary: #6b7280;
+            --text-muted: #9ca3af;
+            --border: #e5e7eb;
+            --border-light: #f3f4f6;
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --primary-bg: #eef2ff;
+            --primary-bg-light: #f5f7ff;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 4px 20px rgba(99, 102, 241, 0.15);
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
-            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --scrollbar-track: #f1f5f9;
+            --scrollbar-thumb: #d1d5db;
+            --scrollbar-thumb-hover: #9ca3af;
+            --toast-bg: #1f2937;
+            --toast-text: #f1f5f9;
+            --badge-bg: #eef2ff;
+            --badge-text: #6366f1;
+            --header-border: rgba(0, 0, 0, 0.06);
+            --engine-item-hover: #f8fafc;
+            --engine-item-border: transparent;
+            --form-bg: #ffffff;
+            --form-border: #e5e7eb;
+            --footer-border: #e5e7eb;
+            --footer-bg: #ffffff;
+            --notice-bg: #eef2ff;
+            --notice-border: #c7d2fe;
+            --notice-text: #4338ca;
+            --card-header-bg: #fafafa;
+            --fallback-bg: #f9fafb;
+            --btn-mini-bg: #f3f4f6;
+            --btn-mini-border: #e5e7eb;
+            --btn-mini-text: #6b7280;
+            --btn-mini-hover-bg: #eef2ff;
+            --btn-mini-hover-text: #6366f1;
+            --btn-mini-hover-border: #6366f1;
         }
 
         * {
@@ -39,16 +123,35 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
-        /* ===== 顶部导航 ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover);
+        }
+
         .header {
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #1a73e8 100%);
+            background: var(--bg-header);
             padding: 20px 0 0;
             position: sticky;
             top: 0;
             z-index: 100;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid var(--header-border);
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
         .header-inner {
             max-width: 1400px;
@@ -60,19 +163,33 @@
             align-items: center;
             gap: 14px;
             margin-bottom: 18px;
+            flex-wrap: wrap;
         }
         .logo-icon {
             width: 48px;
             height: 48px;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.10);
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 26px;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             flex-shrink: 0;
+            overflow: hidden;
+            padding: 4px;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        [data-theme="light"] .logo-icon {
+            background: rgba(99, 102, 241, 0.08);
+            border-color: rgba(99, 102, 241, 0.15);
+        }
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+            display: block;
         }
         .logo-text h1 {
             font-size: 26px;
@@ -80,22 +197,32 @@
             color: #fff;
             letter-spacing: 1px;
             line-height: 1.2;
+            transition: color 0.3s ease;
+        }
+        [data-theme="light"] .logo-text h1 {
+            color: #1f2937;
         }
         .logo-text h1 span {
             color: #60a5fa;
+        }
+        [data-theme="light"] .logo-text h1 span {
+            color: #6366f1;
         }
         .logo-text p {
             font-size: 13px;
             color: rgba(255, 255, 255, 0.7);
             letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+        [data-theme="light"] .logo-text p {
+            color: #6b7280;
         }
         .logo-badge {
-            margin-left: auto;
             display: flex;
             align-items: center;
             gap: 6px;
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 20px;
             padding: 6px 14px;
             color: #fff;
@@ -103,6 +230,12 @@
             font-weight: 500;
             backdrop-filter: blur(10px);
             white-space: nowrap;
+            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        [data-theme="light"] .logo-badge {
+            background: rgba(99, 102, 241, 0.08);
+            border-color: rgba(99, 102, 241, 0.15);
+            color: #4f46e5;
         }
         .logo-badge .dot {
             width: 7px;
@@ -123,7 +256,57 @@
             }
         }
 
-        /* ===== 搜索区域 ===== */
+        .theme-toggle-wrap {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            padding: 6px 12px 6px 14px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(10px);
+            white-space: nowrap;
+            font-family: inherit;
+        }
+        [data-theme="light"] .theme-toggle {
+            background: rgba(99, 102, 241, 0.08);
+            border-color: rgba(99, 102, 241, 0.15);
+            color: #4f46e5;
+        }
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.20);
+            transform: scale(1.03);
+        }
+        [data-theme="light"] .theme-toggle:hover {
+            background: rgba(99, 102, 241, 0.12);
+        }
+        .theme-toggle .icon {
+            font-size: 18px;
+            line-height: 1;
+        }
+        .theme-toggle .label {
+            font-size: 12px;
+        }
+        @media (max-width: 600px) {
+            .theme-toggle .label {
+                display: none;
+            }
+            .theme-toggle {
+                padding: 6px 10px;
+            }
+        }
+
         .search-area {
             padding-bottom: 20px;
         }
@@ -131,24 +314,38 @@
             display: flex;
             gap: 12px;
             align-items: center;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 50px;
             padding: 6px 6px 6px 22px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(20px);
             max-width: 800px;
             margin: 0 auto;
             transition: var(--transition);
         }
+        [data-theme="light"] .search-box {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
         .search-box:focus-within {
-            background: rgba(255, 255, 255, 0.18);
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.30);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.06);
+        }
+        [data-theme="light"] .search-box:focus-within {
+            background: #ffffff;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.10);
         }
         .search-box .icon {
             font-size: 20px;
             flex-shrink: 0;
-            opacity: 0.8;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        [data-theme="light"] .search-box .icon {
+            opacity: 0.5;
         }
         .search-box input {
             flex: 1;
@@ -159,9 +356,17 @@
             color: #fff;
             padding: 10px 0;
             min-width: 0;
+            font-family: inherit;
+            transition: color 0.3s ease;
+        }
+        [data-theme="light"] .search-box input {
+            color: #1f2937;
         }
         .search-box input::placeholder {
-            color: rgba(255, 255, 255, 0.55);
+            color: rgba(255, 255, 255, 0.45);
+        }
+        [data-theme="light"] .search-box input::placeholder {
+            color: #9ca3af;
         }
         .search-box input::-webkit-search-cancel-button {
             -webkit-appearance: none;
@@ -180,19 +385,27 @@
             white-space: nowrap;
             letter-spacing: 0.5px;
             flex-shrink: 0;
+            font-family: inherit;
+        }
+        [data-theme="light"] .btn-search {
+            background: var(--primary);
+            color: #fff;
         }
         .btn-search:hover {
-            background: #f0f7ff;
             transform: scale(1.03);
-            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.25);
+        }
+        [data-theme="light"] .btn-search:hover {
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.30);
+            background: var(--primary-dark);
         }
         .btn-search:active {
             transform: scale(0.97);
         }
         .btn-open-all {
             background: transparent;
-            color: #fff;
-            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.8);
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
             border-radius: 50px;
             padding: 9px 20px;
             font-size: 13px;
@@ -201,13 +414,21 @@
             transition: var(--transition);
             white-space: nowrap;
             flex-shrink: 0;
+            font-family: inherit;
+        }
+        [data-theme="light"] .btn-open-all {
+            color: #4f46e5;
+            border-color: rgba(99, 102, 241, 0.30);
         }
         .btn-open-all:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.50);
+        }
+        [data-theme="light"] .btn-open-all:hover {
+            background: rgba(99, 102, 241, 0.08);
+            border-color: rgba(99, 102, 241, 0.50);
         }
 
-        /* ===== 搜索历史 ===== */
         .search-history {
             display: flex;
             align-items: center;
@@ -219,52 +440,73 @@
         }
         .search-history .label {
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.5);
             flex-shrink: 0;
+            transition: color 0.3s ease;
+        }
+        [data-theme="light"] .search-history .label {
+            color: #9ca3af;
         }
         .history-tag {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.10);
             border-radius: 15px;
             padding: 3px 12px;
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.7);
             cursor: pointer;
             transition: var(--transition);
             white-space: nowrap;
         }
+        [data-theme="light"] .history-tag {
+            background: #f3f4f6;
+            border-color: #e5e7eb;
+            color: #6b7280;
+        }
         .history-tag:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
             color: #fff;
+        }
+        [data-theme="light"] .history-tag:hover {
+            background: #eef2ff;
+            color: #4f46e5;
         }
         .history-clear {
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.4);
             cursor: pointer;
             background: none;
             border: none;
             text-decoration: underline;
             padding: 2px 6px;
+            font-family: inherit;
+            transition: color 0.3s ease;
+        }
+        [data-theme="light"] .history-clear {
+            color: #9ca3af;
         }
         .history-clear:hover {
             color: #fff;
         }
+        [data-theme="light"] .history-clear:hover {
+            color: #4f46e5;
+        }
 
-        /* ===== 主内容区 ===== */
         .main-content {
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px 24px 60px;
+            transition: background 0.3s ease;
         }
 
-        /* ===== 引擎管理栏 ===== */
         .engine-panel {
-            background: var(--card-bg);
+            background: var(--bg-card);
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow);
             margin-bottom: 20px;
             overflow: hidden;
             border: 1px solid var(--border);
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .engine-panel-header {
             display: flex;
@@ -277,7 +519,7 @@
             flex-wrap: wrap;
         }
         .engine-panel-header:hover {
-            background: #f9fafb;
+            background: var(--engine-item-hover);
         }
         .engine-panel-header .title {
             font-weight: 700;
@@ -285,14 +527,16 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            color: var(--text);
         }
         .engine-panel-header .title .count-badge {
-            background: var(--primary-light);
-            color: var(--primary);
+            background: var(--badge-bg);
+            color: var(--badge-text);
             border-radius: 12px;
             padding: 1px 10px;
             font-size: 12px;
             font-weight: 600;
+            transition: background 0.3s ease, color 0.3s ease;
         }
         .engine-panel-header .arrow {
             transition: var(--transition);
@@ -309,26 +553,28 @@
             flex-wrap: wrap;
         }
         .btn-mini {
-            background: var(--bg);
-            border: 1px solid var(--border);
+            background: var(--btn-mini-bg);
+            border: 1px solid var(--btn-mini-border);
             border-radius: 6px;
             padding: 4px 12px;
             font-size: 12px;
             cursor: pointer;
             transition: var(--transition);
-            color: var(--text-secondary);
+            color: var(--btn-mini-text);
             font-weight: 500;
+            font-family: inherit;
         }
         .btn-mini:hover {
-            background: var(--primary-light);
-            color: var(--primary);
-            border-color: var(--primary);
+            background: var(--btn-mini-hover-bg);
+            color: var(--btn-mini-hover-text);
+            border-color: var(--btn-mini-hover-border);
         }
         .engine-panel-body {
             padding: 0 20px 18px;
             display: none;
             border-top: 1px solid var(--border);
             padding-top: 16px;
+            transition: border-color 0.3s ease;
         }
         .engine-panel-body.open {
             display: block;
@@ -356,11 +602,24 @@
             padding: 6px 10px;
             border-radius: var(--radius-sm);
             transition: var(--transition);
-            cursor: pointer;
-            border: 1px solid transparent;
+            cursor: grab;
+            border: 1px solid var(--engine-item-border);
+            background: transparent;
+            user-select: none;
+        }
+        .engine-item:active {
+            cursor: grabbing;
+        }
+        .engine-item.dragging {
+            opacity: 0.5;
+            border-color: var(--primary);
+        }
+        .engine-item.drag-over {
+            border-color: var(--primary);
+            background: var(--primary-bg-light);
         }
         .engine-item:hover {
-            background: #f3f4f6;
+            background: var(--engine-item-hover);
             border-color: var(--border);
         }
         .engine-item input[type="checkbox"] {
@@ -378,6 +637,18 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            color: var(--text);
+        }
+        .engine-item .drag-handle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            cursor: grab;
+            opacity: 0.4;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+        .engine-item:hover .drag-handle {
+            opacity: 0.8;
         }
         .engine-item .badge-custom {
             font-size: 10px;
@@ -387,6 +658,10 @@
             padding: 1px 5px;
             font-weight: 600;
             flex-shrink: 0;
+        }
+        [data-theme="dark"] .engine-item .badge-custom {
+            background: #7c3aed;
+            color: #c4b5fd;
         }
         .engine-item .btn-remove-custom {
             background: none;
@@ -399,16 +674,16 @@
             opacity: 0;
             transition: var(--transition);
             flex-shrink: 0;
+            font-family: inherit;
         }
         .engine-item:hover .btn-remove-custom {
             opacity: 1;
         }
         .engine-item .btn-remove-custom:hover {
             color: var(--danger);
-            background: #fef2f2;
+            background: rgba(239, 68, 68, 0.10);
         }
 
-        /* ===== 自定义引擎添加 ===== */
         .custom-engine-form {
             display: flex;
             gap: 10px;
@@ -420,17 +695,18 @@
         }
         .custom-engine-form input {
             padding: 8px 14px;
-            border: 1.5px solid var(--border);
+            border: 1.5px solid var(--form-border);
             border-radius: var(--radius-sm);
             font-size: 13px;
             outline: none;
             transition: var(--transition);
-            background: #fafafa;
+            background: var(--form-bg);
+            color: var(--text);
+            font-family: inherit;
         }
         .custom-engine-form input:focus {
             border-color: var(--primary);
-            background: #fff;
-            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
         }
         .custom-engine-form .input-name {
             width: 140px;
@@ -452,9 +728,12 @@
             cursor: pointer;
             transition: var(--transition);
             white-space: nowrap;
+            font-family: inherit;
         }
         .btn-add-engine:hover {
             background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
         }
         .form-hint {
             font-size: 11px;
@@ -463,14 +742,18 @@
             margin-top: 4px;
         }
         .form-hint code {
-            background: #f3f4f6;
+            background: var(--bg-secondary);
             padding: 1px 6px;
             border-radius: 4px;
             font-size: 11px;
-            color: var(--primary);
+            color: var(--primary-light);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        [data-theme="light"] .form-hint code {
+            background: #f3f4f6;
+            color: #6366f1;
         }
 
-        /* ===== 结果区域 ===== */
         .results-header {
             display: flex;
             align-items: center;
@@ -481,42 +764,47 @@
         .results-header h2 {
             font-size: 17px;
             font-weight: 700;
+            color: var(--text);
         }
         .results-header .keyword {
             color: var(--primary);
-            background: var(--primary-light);
+            background: var(--primary-bg);
             padding: 2px 12px;
             border-radius: 16px;
             font-size: 14px;
             font-weight: 600;
+            transition: background 0.3s ease, color 0.3s ease;
         }
         .results-header .info {
             font-size: 13px;
             color: var(--text-secondary);
         }
+
         .date-notice {
-            background: #fffbeb;
-            border: 1px solid #fde68a;
+            background: var(--notice-bg);
+            border: 1px solid var(--notice-border);
             border-radius: var(--radius-sm);
             padding: 10px 16px;
             font-size: 13px;
-            color: #92400e;
+            color: var(--notice-text);
             margin-bottom: 16px;
             display: flex;
             align-items: center;
             gap: 8px;
             flex-wrap: wrap;
+            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
         .date-notice .icon {
             font-size: 16px;
         }
+
         .results-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
             gap: 16px;
         }
         .result-card {
-            background: var(--card-bg);
+            background: var(--bg-card);
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow);
             overflow: hidden;
@@ -528,16 +816,18 @@
         }
         .result-card:hover {
             box-shadow: var(--shadow-hover);
-            border-color: #d1d5db;
+            border-color: var(--primary);
+            transform: translateY(-2px);
         }
         .result-card-header {
             display: flex;
             align-items: center;
             gap: 8px;
             padding: 12px 16px;
-            background: #fafafa;
+            background: var(--card-header-bg);
             border-bottom: 1px solid var(--border);
             flex-shrink: 0;
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
         .result-card-header .engine-name {
             font-weight: 700;
@@ -547,9 +837,10 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            color: var(--text);
         }
         .result-card-header .btn-open {
-            background: var(--primary-light);
+            background: var(--primary-bg);
             color: var(--primary);
             border: none;
             border-radius: 6px;
@@ -563,6 +854,7 @@
             display: inline-flex;
             align-items: center;
             gap: 4px;
+            font-family: inherit;
         }
         .result-card-header .btn-open:hover {
             background: var(--primary);
@@ -580,20 +872,22 @@
             flex: 1;
             border: none;
             width: 100%;
-            background: #fff;
+            background: var(--bg);
             min-height: 0;
             display: block;
+            transition: background 0.3s ease;
         }
         .result-card .iframe-fallback {
             flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #f9fafb;
+            background: var(--fallback-bg);
             color: var(--text-secondary);
             font-size: 13px;
             text-align: center;
             padding: 20px;
+            transition: background 0.3s ease, color 0.3s ease;
         }
         .result-card .iframe-fallback a {
             color: var(--primary);
@@ -604,11 +898,11 @@
             text-decoration: underline;
         }
 
-        /* ===== 空状态 ===== */
         .empty-state {
             text-align: center;
             padding: 60px 20px;
             color: var(--text-secondary);
+            transition: color 0.3s ease;
         }
         .empty-state .icon {
             font-size: 56px;
@@ -620,6 +914,7 @@
             font-weight: 600;
             color: var(--text);
             margin-bottom: 8px;
+            transition: color 0.3s ease;
         }
         .empty-state p {
             font-size: 14px;
@@ -627,21 +922,33 @@
             margin: 0 auto;
         }
 
-        /* ===== 底部 ===== */
         .footer {
             text-align: center;
             padding: 28px 20px;
             font-size: 12px;
             color: var(--text-secondary);
-            border-top: 1px solid var(--border);
-            background: #fff;
+            border-top: 1px solid var(--footer-border);
+            background: var(--footer-bg);
+            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
         .footer a {
             color: var(--primary);
             text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .footer .author-link {
+            font-weight: 600;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+        .footer .author-link:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
         }
 
-        /* ===== Toast提示 ===== */
         .toast-container {
             position: fixed;
             bottom: 30px;
@@ -652,27 +959,35 @@
             gap: 10px;
         }
         .toast {
-            background: #1f2937;
-            color: #fff;
+            background: var(--toast-bg);
+            color: var(--toast-text);
             padding: 12px 20px;
             border-radius: 10px;
             font-size: 13px;
             font-weight: 500;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
             animation: slideInToast 0.3s ease;
             display: flex;
             align-items: center;
             gap: 8px;
             max-width: 380px;
+            border: 1px solid var(--border);
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
         .toast.success {
             background: #065f46;
+            color: #d1fae5;
+            border-color: #34d399;
         }
         .toast.error {
             background: #991b1b;
+            color: #fecaca;
+            border-color: #f87171;
         }
         .toast.warning {
             background: #92400e;
+            color: #fef3c7;
+            border-color: #fbbf24;
         }
         @keyframes slideInToast {
             from {
@@ -698,7 +1013,6 @@
             }
         }
 
-        /* ===== 响应式 ===== */
         @media (max-width: 900px) {
             .results-grid {
                 grid-template-columns: 1fr;
@@ -721,8 +1035,8 @@
             .logo-icon {
                 width: 38px;
                 height: 38px;
-                font-size: 20px;
                 border-radius: 10px;
+                padding: 3px;
             }
             .logo-text h1 {
                 font-size: 20px;
@@ -731,6 +1045,9 @@
                 font-size: 11px;
             }
             .logo-badge {
+                display: none;
+            }
+            .theme-toggle .label {
                 display: none;
             }
             .search-box {
@@ -804,25 +1121,6 @@
             }
         }
 
-        /* ===== 滚动条美化 ===== */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #c1c7cd;
-            border-radius: 4px;
-            transition: background 0.2s;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #a0a7ae;
-        }
-
-        /* ===== 打印样式 ===== */
         @media print {
             .header,
             .engine-panel,
@@ -843,25 +1141,36 @@
                 grid-template-columns: 1fr;
             }
             body {
-                background: #fff;
+                background: #fff !important;
+            }
+            .result-card {
+                border: 1px solid #ddd !important;
+                box-shadow: none !important;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== 顶部导航 ===== -->
     <header class="header" id="header">
         <div class="header-inner">
             <div class="logo-area">
-                <div class="logo-icon">📚</div>
+                <div class="logo-icon">
+                    <img src="https://beeimg.us.ci/temp/6f6b1770a79b6b09618ed2152f0be338.png" alt="文心云搜">
+                </div>
                 <div class="logo-text">
                     <h1>文心<span>云搜</span></h1>
                     <p>一站式资源聚合搜索平台</p>
                 </div>
-                <div class="logo-badge">
-                    <span class="dot"></span>
-                    <span>本地运行 · 数据不上云</span>
+                <div class="theme-toggle-wrap">
+                    <div class="logo-badge">
+                        <span class="dot"></span>
+                        <span>本地运行 · 数据不上云</span>
+                    </div>
+                    <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+                        <span class="icon" id="themeIcon">🌙</span>
+                        <span class="label" id="themeLabel">深色</span>
+                    </button>
                 </div>
             </div>
             <div class="search-area">
@@ -876,25 +1185,24 @@
         </div>
     </header>
 
-    <!-- ===== 主内容区 ===== -->
     <main class="main-content">
-        <!-- 引擎管理面板 -->
         <div class="engine-panel" id="enginePanel">
             <div class="engine-panel-header" onclick="toggleEnginePanel()">
                 <span class="title">
                     ⚙️ 搜索引擎管理
                     <span class="count-badge" id="engineCountBadge">0 个已选</span>
+                    <span style="font-size:11px; color:var(--text-secondary); font-weight:400; margin-left:8px;">(拖拽调整顺序)</span>
                 </span>
                 <div class="engine-actions" onclick="event.stopPropagation()">
                     <button class="btn-mini" onclick="selectAllEngines()">全选</button>
                     <button class="btn-mini" onclick="deselectAllEngines()">全不选</button>
                     <button class="btn-mini" onclick="resetEngines()">恢复默认</button>
+                    <button class="btn-mini" onclick="shuffleEngines()">随机打乱</button>
                 </div>
                 <span class="arrow" id="panelArrow">▼</span>
             </div>
             <div class="engine-panel-body" id="enginePanelBody">
                 <div class="engine-grid" id="engineGrid"></div>
-                <!-- 自定义引擎添加 -->
                 <div class="custom-engine-form">
                     <input type="text" class="input-name" id="customEngineName" placeholder="引擎名称" autocomplete="off">
                     <input type="text" class="input-url" id="customEngineUrl" placeholder="搜索URL（使用 %s 作为关键词占位符）" autocomplete="off">
@@ -904,13 +1212,11 @@
             </div>
         </div>
 
-        <!-- 日期排序说明 -->
         <div class="date-notice" id="dateNotice" style="display:none;">
             <span class="icon">📅</span>
             <span><strong>日期排序说明：</strong>各资源网站内部已按<strong>时间倒序</strong>排列搜索结果（最新在前）。受浏览器跨域安全策略限制，无法自动提取各站结果的日期进行统一排序，请在各引擎卡片中查看按时间排列的结果。</span>
         </div>
 
-        <!-- 结果区域 -->
         <div class="results-header" id="resultsHeader" style="display:none;">
             <h2>搜索结果</h2>
             <span class="keyword" id="resultKeyword"></span>
@@ -918,124 +1224,144 @@
         </div>
         <div class="results-grid" id="resultsGrid"></div>
 
-        <!-- 空状态 -->
         <div class="empty-state" id="emptyState">
             <div class="icon">🔎</div>
             <h3>输入关键词开始搜索</h3>
-            <p>文心云搜将同时在 <strong>55+</strong> 个资源网站中搜索，结果按各站时间倒序排列。所有数据保存在本地浏览器中。</p>
+            <p>文心云搜将同时在 <strong>56+</strong> 个资源网站中搜索，结果按各站时间倒序排列。所有数据保存在本地浏览器中。</p>
         </div>
     </main>
 
-    <!-- ===== 底部 ===== -->
     <footer class="footer">
         <p>📚 <strong>文心云搜</strong> · 纯本地运行 · 数据不上云 · 支持自定义引擎 · 共 <span id="footerEngineCount">0</span> 个内置引擎</p>
         <p style="margin-top:4px;">各引擎搜索结果归原网站所有，本站仅提供聚合跳转功能</p>
+        <p style="margin-top:6px; font-size:13px;">
+            作者：<a href="https://b23.tv/r4Xn88M" target="_blank" rel="noopener noreferrer" class="author-link">司秦淮</a>
+            <span style="color:var(--text-muted); margin:0 6px;">·</span>
+            <span style="color:var(--text-secondary);">📖 分享让知识流动</span>
+        </p>
     </footer>
 
-    <!-- Toast容器 -->
     <div class="toast-container" id="toastContainer"></div>
 
     <script>
         (function() {
-            // ===== 内置引擎列表 =====
             const BUILTIN_ENGINES = [
-                { name: '小高教学网', url: 'https://www.xgw4.com/?s=%s' },
-                { name: '悠久的小宝库', url: 'https://u9baoku.xyz/?s=%s' },
-                { name: '小刀娱乐网', url: 'https://www.x6d.com/daowangsousuo?q=%s&typeid=0' },
                 { name: '果核剥壳', url: 'https://www.ghxi.com/?s=%s' },
-                { name: '爱资源网', url: 'https://www.izywang.com/?s=%s' },
-                { name: '黑域基地', url: 'https://www.hybase.com/search.asp?m=2&word=%s' },
-                { name: '乐于分享网', url: 'https://fffxx.com/?keyword=%s' },
-                { name: 'QiuQuan的博客', url: 'https://www.qiuquan.org/?s=%s' },
-                { name: '吾名软件库', url: 'https://www.5mku.com/index.php?keyword=%s' },
-                { name: '软件库', url: 'https://www.ligonggong.com/?s=%s' },
-                { name: '腾轩网', url: 'https://www.tengxuanw.com/index.php?keyword=%s&typeid=0' },
-                { name: 'GO破解', url: 'https://www.gopojie.com/?cat=&s=%s' },
-                { name: '枫音应用', url: 'https://www.fy6b.com/?s=%s' },
-                { name: 'ahhhh分享', url: 'https://www.ahhhhfs.com/?cat=&s=%s' },
-                { name: '苏音资源', url: 'https://www.suyin66.com/?s=%s' },
-                { name: '怪咖分享社', url: 'https://www.gkhhh.com/?s=%s' },
-                { name: '分享迷', url: 'https://www.fenxm.com/search.php?q=%s' },
-                { name: '破解基地', url: 'https://pojiejd.com/search.php?q=%s' },
                 { name: 'APP喵资源', url: 'https://www.appmiu.com/?s=%s&type=post' },
-                { name: '亿破姐', url: 'https://www.ypojie.com/?s=%s' },
-                { name: '六一库', url: 'https://www.61ku.com/?s=%s' },
-                { name: '好料空间', url: 'https://www.h6room.com/?s=%s&type=post' },
-                { name: '小鱼资源库', url: 'https://www.yzyk.xyz/?s=%s&type=post' },
-                { name: 'i3综合社区', url: 'https://www.i3zh.com/?s=%s&type=post' },
-                { name: '绿软部落', url: 'https://www.ludown.com/?s=%s' },
-                { name: '东楼资源网', url: 'https://www.34bc.com/index.php?keyword=%s&typeid=0' },
-                { name: '资源熊', url: 'https://ziyuanxiong.cn/?s=%s&type=post' },
-                { name: 'th_sjy资源库', url: 'http://www.th-sjy.com/?s=%s' },
-                { name: '小搜资源网', url: 'https://www.xiaosou.cc/index.php?keyword=%s&typeid=0' },
-                { name: '往前方资源网', url: 'https://qianfangzy.com/?s=%s' },
-                { name: '安卓应用下载站', url: 'https://www.applnn.com/search?q=%s&postTypes=post#google_vignette' },
-                { name: '小雨资源网', url: 'https://www.0ixy.com/index.php?keyword=%s&typeid=0' },
-                { name: '独特吧', url: 'https://www.dute8.cn/index.php?keyword=%s' },
-                { name: '小欧辅助网', url: 'https://www.665fzw.cc/index.php?keyword=%s&typeid=0' },
-                { name: 'DVD资源网', url: 'https://www.dvddvd.com/index.php?keyword=%s&typeid=0' },
-                { name: '红尘资源网', url: 'https://www.hc0.cn/search.php?q=%s' },
-                { name: '铁柱资源网', url: 'https://qq8m.com/search.php?q=%s' },
-                { name: '闲鱼资源网', url: 'https://www.xianyuai.cn/index.php?keyword=%s' },
-                { name: '橘子资源网', url: 'https://www.juzia.cn/?s=%s&type=post' },
-                { name: '小飞资源网', url: 'https://xiaofeizyw.xyz/index.php?keyword=%s' },
-                { name: '皮皮辅助网', url: 'https://www.pipizyw.com/?keyword=%s' },
-                { name: '悠悠资源网', url: 'https://www.uy9.cn/search.php?q=%s' },
+                { name: 'QiuQuan的博客', url: 'https://www.qiuquan.org/?s=%s' },
                 { name: '极客酱', url: 'https://www.jikejiang.com/?s=%s' },
-                { name: '百万资源网', url: 'https://www.bw1.net/?s=%s&type=post' },
-                { name: '小妖怪分享', url: 'https://www.xyg688.com/?s=%s' },
-                { name: '溜发资源网', url: 'https://www.666888.best/search/%s/' },
-                { name: '小宇资源网', url: 'https://www.kacao.net/?s=%s' },
+                { name: '小高教学网', url: 'https://www.xgw4.com/?s=%s' },
+                { name: '小飞资源网', url: 'https://xiaofeizyw.xyz/index.php?keyword=%s' },
+                { name: '青瓜资源', url: 'https://www.dofk1.com/?ss360Query=%s' },
+                { name: '破解基地', url: 'https://pojiejd.com/search.php?q=%s' },
+                { name: '小欧辅助网', url: 'https://www.665fzw.cc/index.php?keyword=%s&typeid=0' },
                 { name: '星途资源网', url: 'https://www.xtuzy.cn/?s=%s&cat=' },
                 { name: '资源共享网', url: 'https://www.08i8.com/search/keyword-%s' },
-                { name: '星空知', url: 'https://www.xkzhi.cn/?s=%s&type=post' },
-                { name: '青瓜资源', url: 'https://www.dofk1.com/?ss360Query=%s' },
-                { name: '若依资源网', url: 'https://m.ruoyiw.com/news/?list_refer-theme-%s.html' },
-                { name: '雷霆资源网', url: 'https://www.ltzyw.com/search.php?q=%s' },
+                { name: '爱资源网', url: 'https://www.izywang.com/?s=%s' },
+                { name: '枫音应用', url: 'https://www.fy6b.com/?s=%s' },
+                { name: '小鱼资源库', url: 'https://www.yzyk.xyz/?s=%s&type=post' },
+                { name: '小妖怪分享', url: 'https://www.xyg688.com/?s=%s' },
+                { name: '小宇资源网', url: 'https://www.kacao.net/?s=%s' },
                 { name: '耀虎资源网', url: 'https://www.yaohux.com/search.php?q=%s' },
-                { name: '零七资源网', url: 'https://www.07zf.cn/search.php?q=%s' }
+                { name: '铁柱资源网', url: 'https://qq8m.com/search.php?q=%s' },
+                { name: '腾轩网', url: 'https://www.tengxuanw.com/index.php?keyword=%s&typeid=0' },
+                { name: '怪咖分享社', url: 'https://www.gkhhh.com/?s=%s' },
+                { name: '小雨资源网', url: 'https://www.0ixy.com/index.php?keyword=%s&typeid=0' },
+                { name: 'DVD资源网', url: 'https://www.dvddvd.com/index.php?keyword=%s&typeid=0' },
+                { name: '零七资源网', url: 'https://www.07zf.cn/search.php?q=%s' },
+                { name: '独特吧', url: 'https://www.dute8.cn/index.php?keyword=%s' },
+                { name: '吾名软件库', url: 'https://www.5mku.com/index.php?keyword=%s' },
+                { name: '亿破姐', url: 'https://www.ypojie.com/?s=%s' },
+                { name: '分享迷', url: 'https://www.fenxm.com/search.php?q=%s' },
+                { name: '小刀娱乐网', url: 'https://www.x6d.com/daowangsousuo?q=%s&typeid=0' },
+                { name: 'i3综合社区', url: 'https://www.i3zh.com/?s=%s&type=post' },
+                { name: '东楼资源网', url: 'https://www.34bc.com/index.php?keyword=%s&typeid=0' },
+                { name: '往前方资源网', url: 'https://qianfangzy.com/?s=%s' },
+                { name: '好料空间', url: 'https://www.h6room.com/?s=%s&type=post' },
+                { name: 'GO破解', url: 'https://www.gopojie.com/?cat=&s=%s' },
+                { name: '雷霆资源网', url: 'https://www.ltzyw.com/search.php?q=%s' },
+                { name: '黑域基地', url: 'https://www.hybase.com/search.asp?m=2&word=%s' },
+                { name: '资源熊', url: 'https://ziyuanxiong.cn/?s=%s&type=post' },
+                { name: '皮皮辅助网', url: 'https://www.pipizyw.com/?keyword=%s' },
+                { name: '百万资源网', url: 'https://www.bw1.net/?s=%s&type=post' },
+                { name: '安卓应用下载站', url: 'https://www.applnn.com/search?q=%s&postTypes=post#google_vignette' },
+                { name: 'ahhhh分享', url: 'https://www.ahhhhfs.com/?cat=&s=%s' },
+                { name: '若依资源网', url: 'https://m.ruoyiw.com/news/?list_refer-theme-%s.html' },
+                { name: '六一库', url: 'https://www.61ku.com/?s=%s' },
+                { name: '乐于分享网', url: 'https://fffxx.com/?keyword=%s' },
+                { name: '橘子资源网', url: 'https://www.juzia.cn/?s=%s&type=post' },
+                { name: '闲鱼资源网', url: 'https://www.xianyuai.cn/index.php?keyword=%s' },
+                { name: '软件库', url: 'https://www.ligonggong.com/?s=%s' },
+                { name: '星空知', url: 'https://www.xkzhi.cn/?s=%s&type=post' },
+                { name: '悠悠资源网', url: 'https://www.uy9.cn/search.php?q=%s' },
+                { name: '溜发资源网', url: 'https://www.666888.best/search/%s/' },
+                { name: '悠久的小宝库', url: 'https://u9baoku.xyz/?s=%s' },
+                { name: '小搜资源网', url: 'https://www.xiaosou.cc/index.php?keyword=%s&typeid=0' },
+                { name: 'th_sjy资源库', url: 'http://www.th-sjy.com/?s=%s' },
+                { name: '红尘资源网', url: 'https://www.hc0.cn/search.php?q=%s' },
+                { name: '绿软部落', url: 'https://www.ludown.com/?s=%s' },
+                { name: '芊芊精典', url: 'https://myqqjd.com/?s=%s' },
+                { name: '苏音资源', url: 'https://www.suyin66.com/?s=%s' },
             ];
 
-            // ===== localStorage 键名 =====
             const STORAGE_KEY_SELECTED = 'wenxin_yunsou_selected_engines';
             const STORAGE_KEY_CUSTOM = 'wenxin_yunsou_custom_engines';
             const STORAGE_KEY_HISTORY = 'wenxin_yunsou_search_history';
+            const STORAGE_KEY_ORDER = 'wenxin_yunsou_engine_order';
+            const STORAGE_KEY_THEME = 'wenxin_yunsou_theme';
 
-            // ===== 状态 =====
-            let selectedEngines = new Set(); // 存储选中引擎的名称（或自定义引擎的唯一ID）
-            let customEngines = []; // 自定义引擎列表
+            let selectedEngines = new Set();
+            let customEngines = [];
             let searchHistory = [];
+            let engineOrder = [];
             let isPanelOpen = false;
+            let currentTheme = 'dark';
 
-            // ===== 初始化 =====
-            function init() {
-                loadFromStorage();
-                renderEngineList();
-                renderSearchHistory();
-                updateEngineCountBadge();
-                updateFooterCount();
-                bindEvents();
-                // 自动聚焦搜索框
-                document.getElementById('searchInput').focus();
+            function initTheme() {
+                const saved = localStorage.getItem(STORAGE_KEY_THEME);
+                if (saved === 'light' || saved === 'dark') {
+                    currentTheme = saved;
+                } else {
+                    currentTheme = 'dark';
+                }
+                applyTheme(currentTheme);
             }
 
-            // ===== 加载本地存储 =====
+            function applyTheme(theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                currentTheme = theme;
+                localStorage.setItem(STORAGE_KEY_THEME, theme);
+                const icon = document.getElementById('themeIcon');
+                const label = document.getElementById('themeLabel');
+                if (theme === 'dark') {
+                    icon.textContent = '🌙';
+                    label.textContent = '深色';
+                } else {
+                    icon.textContent = '☀️';
+                    label.textContent = '浅色';
+                }
+            }
+
+            function toggleTheme() {
+                const next = currentTheme === 'dark' ? 'light' : 'dark';
+                applyTheme(next);
+                showToast(next === 'dark' ? '🌙 已切换到深色模式' : '☀️ 已切换到浅色模式', 'info');
+            }
+
             function loadFromStorage() {
-                // 加载选中的引擎
                 try {
                     const savedSelected = localStorage.getItem(STORAGE_KEY_SELECTED);
                     if (savedSelected) {
-                        const arr = JSON.parse(savedSelected);
-                        selectedEngines = new Set(arr);
+                        selectedEngines = new Set(JSON.parse(savedSelected));
                     } else {
-                        // 默认全选
                         BUILTIN_ENGINES.forEach(e => selectedEngines.add(e.name));
+                        customEngines.forEach(e => selectedEngines.add(e.name));
                     }
                 } catch (e) {
                     BUILTIN_ENGINES.forEach(e => selectedEngines.add(e.name));
+                    customEngines.forEach(e => selectedEngines.add(e.name));
                 }
 
-                // 加载自定义引擎
                 try {
                     const savedCustom = localStorage.getItem(STORAGE_KEY_CUSTOM);
                     if (savedCustom) {
@@ -1047,7 +1373,6 @@
                     customEngines = [];
                 }
 
-                // 加载搜索历史
                 try {
                     const savedHistory = localStorage.getItem(STORAGE_KEY_HISTORY);
                     if (savedHistory) {
@@ -1059,26 +1384,63 @@
                     searchHistory = [];
                 }
 
-                // 确保自定义引擎也被选中（如果之前选中过）
-                customEngines.forEach(ce => {
-                    if (selectedEngines.has(ce.name)) {
-                        // 已选中
+                try {
+                    const savedOrder = localStorage.getItem(STORAGE_KEY_ORDER);
+                    if (savedOrder) {
+                        engineOrder = JSON.parse(savedOrder);
+                        const allNames = getAllEngineNames();
+                        engineOrder = engineOrder.filter(name => allNames.includes(name));
+                        allNames.forEach(name => {
+                            if (!engineOrder.includes(name)) {
+                                engineOrder.push(name);
+                            }
+                        });
+                    } else {
+                        const builtinNames = BUILTIN_ENGINES.map(e => e.name);
+                        const customNames = customEngines.map(e => e.name);
+                        engineOrder = [...builtinNames, ...customNames];
                     }
-                });
+                } catch (e) {
+                    const builtinNames = BUILTIN_ENGINES.map(e => e.name);
+                    const customNames = customEngines.map(e => e.name);
+                    engineOrder = [...builtinNames, ...customNames];
+                }
+                saveEngineOrder();
             }
 
-            // ===== 保存到本地存储 =====
+            function getAllEngineNames() {
+                const names = [];
+                BUILTIN_ENGINES.forEach(e => names.push(e.name));
+                customEngines.forEach(e => names.push(e.name));
+                return names;
+            }
+
+            function shuffleArray(arr) {
+                const a = [...arr];
+                for (let i = a.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [a[i], a[j]] = [a[j], a[i]];
+                }
+                return a;
+            }
+
+            function saveEngineOrder() {
+                try {
+                    localStorage.setItem(STORAGE_KEY_ORDER, JSON.stringify(engineOrder));
+                } catch (e) {}
+            }
+
             function saveToStorage() {
                 try {
                     localStorage.setItem(STORAGE_KEY_SELECTED, JSON.stringify(Array.from(selectedEngines)));
                     localStorage.setItem(STORAGE_KEY_CUSTOM, JSON.stringify(customEngines));
                     localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(searchHistory));
+                    saveEngineOrder();
                 } catch (e) {
                     console.warn('保存到 localStorage 失败:', e);
                 }
             }
 
-            // ===== 获取所有引擎（内置 + 自定义） =====
             function getAllEngines() {
                 const all = [];
                 BUILTIN_ENGINES.forEach(e => {
@@ -1090,19 +1452,27 @@
                 return all;
             }
 
-            // ===== 渲染引擎列表 =====
             function renderEngineList() {
                 const grid = document.getElementById('engineGrid');
                 const allEngines = getAllEngines();
+                const ordered = allEngines.sort((a, b) => {
+                    const idxA = engineOrder.indexOf(a.name);
+                    const idxB = engineOrder.indexOf(b.name);
+                    if (idxA === -1) return 1;
+                    if (idxB === -1) return -1;
+                    return idxA - idxB;
+                });
+
                 let html = '';
-                allEngines.forEach(engine => {
+                ordered.forEach((engine, index) => {
                     const isChecked = selectedEngines.has(engine.name) ? 'checked' : '';
                     const customBadge = engine.isCustom ? '<span class="badge-custom">自定义</span>' : '';
                     const removeBtn = engine.isCustom ?
                         `<button class="btn-remove-custom" onclick="removeCustomEngine('${engine.name.replace(/'/g, "\\'")}')" title="删除此自定义引擎">✕</button>` :
                         '';
                     html += `
-                        <div class="engine-item" title="${engine.name}">
+                        <div class="engine-item" draggable="true" data-name="${engine.name}" data-index="${index}">
+                            <span class="drag-handle">⠿</span>
                             <input type="checkbox" id="eng-${engine.name.replace(/[^a-zA-Z0-9]/g, '_')}" 
                                    ${isChecked} 
                                    onchange="toggleEngine('${engine.name.replace(/'/g, "\\'")}', this.checked)">
@@ -1113,9 +1483,78 @@
                     `;
                 });
                 grid.innerHTML = html;
+
+                const items = grid.querySelectorAll('.engine-item');
+                items.forEach(item => {
+                    item.addEventListener('dragstart', handleDragStart);
+                    item.addEventListener('dragend', handleDragEnd);
+                    item.addEventListener('dragover', handleDragOver);
+                    item.addEventListener('dragenter', handleDragEnter);
+                    item.addEventListener('dragleave', handleDragLeave);
+                    item.addEventListener('drop', handleDrop);
+                });
             }
 
-            // ===== 更新引擎计数 =====
+            let dragSourceIndex = null;
+
+            function handleDragStart(e) {
+                const item = e.target.closest('.engine-item');
+                if (!item) return;
+                dragSourceIndex = parseInt(item.dataset.index);
+                item.classList.add('dragging');
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/plain', item.dataset.name);
+            }
+
+            function handleDragEnd(e) {
+                const item = e.target.closest('.engine-item');
+                if (item) item.classList.remove('dragging');
+                document.querySelectorAll('.engine-item').forEach(el => el.classList.remove('drag-over'));
+            }
+
+            function handleDragOver(e) {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+            }
+
+            function handleDragEnter(e) {
+                e.preventDefault();
+                const target = e.target.closest('.engine-item');
+                if (target && target.dataset.index != dragSourceIndex) {
+                    target.classList.add('drag-over');
+                }
+            }
+
+            function handleDragLeave(e) {
+                const target = e.target.closest('.engine-item');
+                if (target) {
+                    target.classList.remove('drag-over');
+                }
+            }
+
+            function handleDrop(e) {
+                e.preventDefault();
+                const target = e.target.closest('.engine-item');
+                if (!target) return;
+                const targetIndex = parseInt(target.dataset.index);
+                if (dragSourceIndex === null || dragSourceIndex === targetIndex) {
+                    document.querySelectorAll('.engine-item').forEach(el => el.classList.remove('drag-over'));
+                    return;
+                }
+
+                const [removed] = engineOrder.splice(dragSourceIndex, 1);
+                let insertIndex = targetIndex;
+                if (dragSourceIndex < targetIndex) {
+                    insertIndex = targetIndex - 1;
+                }
+                engineOrder.splice(insertIndex, 0, removed);
+                saveEngineOrder();
+                renderEngineList();
+                showToast('✅ 排序已更新', 'success');
+                dragSourceIndex = null;
+                document.querySelectorAll('.engine-item').forEach(el => el.classList.remove('drag-over'));
+            }
+
             function updateEngineCountBadge() {
                 const badge = document.getElementById('engineCountBadge');
                 const count = selectedEngines.size;
@@ -1123,23 +1562,21 @@
                 badge.textContent = `${count} / ${total} 个已选`;
             }
 
-            // ===== 更新底部计数 =====
             function updateFooterCount() {
                 document.getElementById('footerEngineCount').textContent = BUILTIN_ENGINES.length;
             }
 
-            // ===== 切换引擎选中状态 =====
             function toggleEngine(name, checked) {
                 if (checked) {
                     selectedEngines.add(name);
                 } else {
                     selectedEngines.delete(name);
                 }
+                renderEngineList();
                 updateEngineCountBadge();
                 saveToStorage();
             }
 
-            // ===== 全选 =====
             function selectAllEngines() {
                 getAllEngines().forEach(e => selectedEngines.add(e.name));
                 renderEngineList();
@@ -1148,7 +1585,6 @@
                 showToast('✅ 已全选所有引擎', 'success');
             }
 
-            // ===== 全不选 =====
             function deselectAllEngines() {
                 selectedEngines.clear();
                 renderEngineList();
@@ -1157,18 +1593,29 @@
                 showToast('已取消全选', 'warning');
             }
 
-            // ===== 恢复默认 =====
             function resetEngines() {
                 selectedEngines.clear();
                 BUILTIN_ENGINES.forEach(e => selectedEngines.add(e.name));
                 customEngines.forEach(e => selectedEngines.add(e.name));
+
+                const builtinNames = BUILTIN_ENGINES.map(e => e.name);
+                const customNames = customEngines.map(e => e.name);
+                engineOrder = [...builtinNames, ...customNames];
+                saveEngineOrder();
                 renderEngineList();
                 updateEngineCountBadge();
                 saveToStorage();
-                showToast('🔄 已恢复默认选中状态', 'success');
+                showToast('🔄 已恢复默认顺序', 'success');
             }
 
-            // ===== 添加自定义引擎 =====
+            function shuffleEngines() {
+                const allNames = getAllEngineNames();
+                engineOrder = shuffleArray(allNames);
+                saveEngineOrder();
+                renderEngineList();
+                showToast('🔀 已随机打乱排序', 'success');
+            }
+
             function addCustomEngine() {
                 const nameInput = document.getElementById('customEngineName');
                 const urlInput = document.getElementById('customEngineUrl');
@@ -1190,7 +1637,6 @@
                     urlInput.focus();
                     return;
                 }
-                // 检查是否重名
                 const allEngines = getAllEngines();
                 if (allEngines.some(e => e.name === name)) {
                     showToast('⚠️ 已存在同名引擎', 'warning');
@@ -1200,6 +1646,7 @@
 
                 customEngines.push({ name: name, url: url });
                 selectedEngines.add(name);
+                engineOrder.push(name);
                 saveToStorage();
                 renderEngineList();
                 updateEngineCountBadge();
@@ -1209,18 +1656,17 @@
                 showToast(`✅ 已添加自定义引擎「${name}」`, 'success');
             }
 
-            // ===== 删除自定义引擎 =====
             function removeCustomEngine(name) {
                 if (!confirm(`确定要删除自定义引擎「${name}」吗？`)) return;
                 customEngines = customEngines.filter(e => e.name !== name);
                 selectedEngines.delete(name);
+                engineOrder = engineOrder.filter(n => n !== name);
                 saveToStorage();
                 renderEngineList();
                 updateEngineCountBadge();
                 showToast(`已删除「${name}」`, 'warning');
             }
 
-            // ===== 切换引擎面板展开/收起 =====
             function toggleEnginePanel() {
                 const body = document.getElementById('enginePanelBody');
                 const arrow = document.getElementById('panelArrow');
@@ -1234,25 +1680,6 @@
                 }
             }
 
-            // ===== 绑定事件 =====
-            function bindEvents() {
-                const searchInput = document.getElementById('searchInput');
-                searchInput.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter' || e.keyCode === 13) {
-                        e.preventDefault();
-                        performSearch();
-                    }
-                });
-                // 输入时如果有值，允许清空
-                searchInput.addEventListener('input', function() {
-                    if (this.value === '') {
-                        // 可以显示历史
-                        renderSearchHistory();
-                    }
-                });
-            }
-
-            // ===== 执行搜索 =====
             function performSearch() {
                 const keyword = document.getElementById('searchInput').value.trim();
                 if (!keyword) {
@@ -1266,17 +1693,11 @@
                     return;
                 }
 
-                // 保存搜索历史
                 addToHistory(keyword);
-
-                // 显示结果
                 displayResults(keyword);
-
-                // 滚动到结果区域
                 document.getElementById('resultsHeader').scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
 
-            // ===== 添加搜索历史 =====
             function addToHistory(keyword) {
                 searchHistory = searchHistory.filter(h => h !== keyword);
                 searchHistory.unshift(keyword);
@@ -1287,7 +1708,6 @@
                 renderSearchHistory();
             }
 
-            // ===== 渲染搜索历史 =====
             function renderSearchHistory() {
                 const container = document.getElementById('searchHistory');
                 if (searchHistory.length === 0) {
@@ -1303,13 +1723,11 @@
                 container.innerHTML = html;
             }
 
-            // ===== 使用历史搜索词 =====
             function useHistory(keyword) {
                 document.getElementById('searchInput').value = keyword;
                 performSearch();
             }
 
-            // ===== 清除历史 =====
             function clearHistory() {
                 searchHistory = [];
                 saveToStorage();
@@ -1317,7 +1735,6 @@
                 showToast('已清除搜索历史', 'info');
             }
 
-            // ===== 显示搜索结果 =====
             function displayResults(keyword) {
                 const grid = document.getElementById('resultsGrid');
                 const emptyState = document.getElementById('emptyState');
@@ -1326,7 +1743,6 @@
                 const resultKeyword = document.getElementById('resultKeyword');
                 const resultCount = document.getElementById('resultCount');
 
-                // 获取选中的引擎
                 const allEngines = getAllEngines();
                 const activeEngines = allEngines.filter(e => selectedEngines.has(e.name));
 
@@ -1350,7 +1766,7 @@
                 activeEngines.forEach(engine => {
                     const searchUrl = engine.url.replace('%s', encodedKeyword);
                     const engineId = engine.name.replace(/[^a-zA-Z0-9]/g, '_');
-                    const customLabel = engine.isCustom ? ' <span style="font-size:10px;color:#f59e0b;">[自定义]</span>' :
+                    const customLabel = engine.isCustom ? ' <span style="font-size:10px;color:var(--warning);">[自定义]</span>' :
                         '';
                     html += `
                         <div class="result-card" id="card-${engineId}">
@@ -1380,7 +1796,6 @@
                 });
                 grid.innerHTML = html;
 
-                // 为每个iframe设置超时检测
                 activeEngines.forEach(engine => {
                     const engineId = engine.name.replace(/[^a-zA-Z0-9]/g, '_');
                     setTimeout(() => {
@@ -1389,7 +1804,6 @@
                 });
             }
 
-            // ===== 检查iframe是否加载成功 =====
             function checkIframeLoaded(engineId, engineName) {
                 const card = document.getElementById(`card-${engineId}`);
                 if (!card) return;
@@ -1397,29 +1811,23 @@
                 const fallback = document.getElementById(`fallback-${engineId}`);
                 if (!iframe || !fallback) return;
 
-                // 尝试检测iframe是否被阻止（跨域时无法直接访问contentDocument）
                 try {
                     const doc = iframe.contentDocument || iframe.contentWindow.document;
                     if (doc && doc.body && doc.body.innerHTML.length > 0) {
-                        // 可能已加载
                         fallback.style.display = 'none';
                         iframe.style.display = 'block';
                         return;
                     }
                 } catch (e) {
-                    // 跨域访问被阻止，说明可能加载了但无法检查
-                    // 保持现状
                     return;
                 }
 
-                // 如果iframe的src为空或未加载
                 if (!iframe.src || iframe.src === 'about:blank') {
                     fallback.style.display = 'flex';
                     iframe.style.display = 'none';
                 }
             }
 
-            // ===== 显示iframe回退 =====
             function showIframeFallback(engineId, engineName, searchUrl) {
                 const fallback = document.getElementById(`fallback-${engineId}`);
                 const card = document.getElementById(`card-${engineId}`);
@@ -1427,7 +1835,6 @@
                     const iframe = card.querySelector('iframe');
                     fallback.style.display = 'flex';
                     if (iframe) iframe.style.display = 'none';
-                    // 更新链接
                     const link = fallback.querySelector('a');
                     if (link) {
                         link.href = searchUrl;
@@ -1436,7 +1843,6 @@
                 }
             }
 
-            // ===== 隐藏iframe回退 =====
             function hideIframeFallback(engineId) {
                 const fallback = document.getElementById(`fallback-${engineId}`);
                 const card = document.getElementById(`card-${engineId}`);
@@ -1447,7 +1853,6 @@
                 }
             }
 
-            // ===== 在新标签页打开所有结果 =====
             function openAllInNewTabs() {
                 const keyword = document.getElementById('searchInput').value.trim();
                 if (!keyword) {
@@ -1464,7 +1869,6 @@
                 const activeEngines = allEngines.filter(e => selectedEngines.has(e.name));
                 const encodedKeyword = encodeURIComponent(keyword);
 
-                // 浏览器可能阻止批量打开窗口，先提示
                 if (activeEngines.length > 5) {
                     if (!confirm(`即将在新标签页打开 ${activeEngines.length} 个搜索结果页面，浏览器可能会拦截。是否继续？`)) {
                         return;
@@ -1482,7 +1886,6 @@
                 addToHistory(keyword);
             }
 
-            // ===== Toast 提示 =====
             function showToast(message, type = 'info') {
                 const container = document.getElementById('toastContainer');
                 const toast = document.createElement('div');
@@ -1498,11 +1901,44 @@
                 }, 2500);
             }
 
-            // ===== 暴露到全局 =====
+            function bindEvents() {
+                const searchInput = document.getElementById('searchInput');
+                searchInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.keyCode === 13) {
+                        e.preventDefault();
+                        performSearch();
+                    }
+                });
+                searchInput.addEventListener('input', function() {
+                    if (this.value === '') {
+                        renderSearchHistory();
+                    }
+                });
+
+                document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+            }
+
+            function init() {
+                initTheme();
+                loadFromStorage();
+                renderEngineList();
+                renderSearchHistory();
+                updateEngineCountBadge();
+                updateFooterCount();
+                bindEvents();
+                document.getElementById('searchInput').focus();
+
+                const input = document.getElementById('searchInput');
+                if (input.value.trim()) {
+                    performSearch();
+                }
+            }
+
             window.toggleEngine = toggleEngine;
             window.selectAllEngines = selectAllEngines;
             window.deselectAllEngines = deselectAllEngines;
             window.resetEngines = resetEngines;
+            window.shuffleEngines = shuffleEngines;
             window.addCustomEngine = addCustomEngine;
             window.removeCustomEngine = removeCustomEngine;
             window.toggleEnginePanel = toggleEnginePanel;
@@ -1513,11 +1949,10 @@
             window.showIframeFallback = showIframeFallback;
             window.hideIframeFallback = hideIframeFallback;
 
-            // ===== 启动 =====
-            document.addEventListener('DOMContentLoaded', init);
-            // 如果DOM已加载完成
             if (document.readyState === 'complete' || document.readyState === 'interactive') {
                 init();
+            } else {
+                document.addEventListener('DOMContentLoaded', init);
             }
         })();
     </script>
